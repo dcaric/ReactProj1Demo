@@ -57,6 +57,8 @@ const Stage1 = () => {
                 <Button className='miami' variant='primary' type='submit'>
                     Add player
                 </Button>
+
+                 {/* list comes from the context */}
                 { context.state.players && context.state.players.length > 0 ?
                 <>
                     <hr/>

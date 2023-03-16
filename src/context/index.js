@@ -22,13 +22,13 @@ class MyProvider extends Component {
     }
 
     removePlayerHandler = (idx) => {
-        let newArray = this.state.players;
+        let newArray =  [...this.state.players]; // it's better to use a new array instead of mutating exising one
         newArray.splice(idx,1);
         this.setState({players:newArray});
     }
 
     nextHandler = () =>{
-        const { players } = this.state;
+        const { players } = this.state; // hack just to avoind this.state.players - just players
 
         if(players.length < 2){
             
@@ -40,6 +40,7 @@ class MyProvider extends Component {
             this.setState({
                 stage:2
             },()=>{
+                // this is CALLBACK after setState is run, so it is called after setState
                 setTimeout(()=>{
                     this.generateLooser()
                 },2000)
@@ -68,6 +69,8 @@ class MyProvider extends Component {
             <>
                 <MyContext.Provider value={{
                     state: this.state,
+                    // these are links to the real functions LEFT side and RIGHT side contains
+                    // names which are used in other components
                     addPlayer: this.addPlayerHandler,
                     removePlayer: this.removePlayerHandler,
                     next: this.nextHandler,
